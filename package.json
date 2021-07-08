@@ -1,0 +1,26 @@
+{
+  "name": "matic-nft-sandbox",
+  "version": "0.10.0",
+  "description": "  ",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "build": "node index.js",
+    "compile": "node tasks/compileSolidity.js",
+    "test": "mocha ./test/ganacheTest.js"
+  },
+  "author": "admazzola",
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^4.3.4",
+    "eth-sig-util": "^3.0.1",
+    "ethereumjs-abi": "^0.6.8",
+    "ethereumjs-util": "^7.0.9",
+    "ganache-cli": "^6.12.2",
+    "json-beautify": "^1.1.1",
+    "mocha": "^8.3.2",
+    "solc": "^0.5.17",
+    "web3": "^1.3.4",
+    "web3-utils": "^1.3.4"
+  }
+}
