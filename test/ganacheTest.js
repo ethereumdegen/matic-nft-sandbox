@@ -12,6 +12,11 @@ import EIP712Utils from '../lib/EIP712Utils.js'
 
 import EIP712Helper from '../lib/EIP712Helper.js'
 
+
+//https://docs.matic.network/docs/develop/ethereum-matic/pos/calling-contracts/erc721/
+//https://static.matic.network/network/testnet/mumbai/index.json
+
+
 let testAccount = {
   publicAddress: '0x95eDA452256C1190947f9ba1fD19422f0120858a',
   secretKey: "0x31c354f57fc542eba2c56699286723e94f7bd02a4891a0a7f68566c2a2df6795",
@@ -36,11 +41,25 @@ const web3 = new Web3(provider, null, OPTIONS);
 //let customConfig = JSON.parse(customConfigJSON)
 
 //const { abi, evm } = require('../compile');
-let contractJSON = fs.readFileSync(path.join('generated/built/MyFirstContract.json'));
-let contractData = JSON.parse(contractJSON)
+let rootTokenJSON = fs.readFileSync(path.join('abi/RootERC721.json'));
+let rootTokenABI = JSON.parse(rootTokenJSON)
+let rootTokenAddress = '0xfA08B72137eF907dEB3F202a60EfBc610D2f224b'
 
-let abi = contractData.abi
-let evm = contractData.evm
+//let rootChainManagerJSON = fs.readFileSync(path.join('abi/RootChainManager.json'));
+//let rootChainManagerABI = JSON.parse(rootChainManagerJSON)
+let rootChainManagerAddress = '0x8829EC24A1BcaCdcF4a3CBDE3A4498172e9FCDcE'
+
+//let rootChainManagerJSON = fs.readFileSync(path.join('abi/RootChainManager.json'));
+//let rootChainManagerABI = JSON.parse(rootChainManagerJSON)
+let childTokenAddress = '0x084297B12F204Adb74c689be08302FA3f12dB8A7'
+
+
+const mainWeb3 = new Web3(mainProvider)  //goerli
+const maticWeb3 = new Web3(maticProvider) //mumbai 
+const rootTokenContract = new mainWeb3.eth.Contract(rootTokenABI, rootTokenAddress)
+const rootChainManagerContract = new mainWeb3.eth.Contract(rootChainManagerABI, rootChainManagerAddress)
+const childTokenContract = new maticWeb3(childTokenABI, childTokenAddress)
+
 
 describe("EIP712 Contract Testing", function() {
     it("deploys contract", async function() {
